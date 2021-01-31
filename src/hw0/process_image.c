@@ -38,7 +38,7 @@ float get_pixel(image im, int x, int y, int c)
 void set_pixel(image im, int x, int y, int c, float v)
 {
     // TODO Fill this in
-    if (!(x < 0 || x > im.w || y < 0 || y > im.h || c < 0 || c > im.c))
+    if (!(x < 0 || x >= im.w || y < 0 || y >= im.h || c < 0 || c >= im.c))
     {
         im.data[c*im.w*im.h + y*im.w + x] = v;
     }
@@ -59,9 +59,8 @@ image rgb_to_grayscale(image im)
     // TODO Fill this in
     for (int i = 0; i < im.h; i++) {
         for (int j = 0; j < im.w; j++) {
-            gray.data[i*im.h + j] = 0.299 * im.data[i*im.h + j] + 0.587 * im.data[im.w*im.h + i*im.h + j] + .114 * im.data[2*im.w*im.h + i*im.h + j];
+            gray.data[i*im.w + j] = 0.299 * im.data[i*im.w + j] + 0.587 * im.data[im.w*im.h + i*im.w + j] + .114 * im.data[2*im.w*im.h + i*im.w + j];
         }
-        
     }
     return gray;
 }

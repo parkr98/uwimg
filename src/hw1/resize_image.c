@@ -32,7 +32,7 @@ image nn_resize(image im, int w, int h)
     for (int i = 0; i < im.c; i++) {
         for (int j = 0; j < h; j++) {
             for (int k = 0; k < w; k++) {
-                new_im.data[i*im.w*im.h + j*im.w + k] = nn_interpolate(im, a_w*k + b_w, a_h*j + b_h, i);
+                set_pixel(new_im, k, j, i, nn_interpolate(im, a_w*k + b_w, a_h*j + b_h, i));
             }
         }
     }
